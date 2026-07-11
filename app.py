@@ -10,8 +10,65 @@ api_key = os.getenv("GEMINI_API_KEY")
 
 # পেজ সেটআপ
 st.set_page_config(page_title="NIRAMOY-24", page_icon="🩺")
-st.title("🩺 NIRAMOY-24")
-st.caption("আপনার ২৪/৭ স্বাস্থ্য সহায়ক — এটি ডাক্তারের বিকল্প নয়")
+
+# ==============================
+# কাস্টম ডিজাইন (CSS + হেডার)
+# ==============================
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Hind Siliguri', sans-serif;
+}
+
+.niramoy-header {
+    background: linear-gradient(135deg, #0E5F56, #0A3F3B);
+    padding: 24px 20px;
+    border-radius: 16px;
+    margin-bottom: 8px;
+}
+.niramoy-header h1 {
+    color: #F2FBF9 !important;
+    margin: 0;
+    font-size: 28px;
+}
+.niramoy-header p {
+    color: #8FF0D6;
+    margin: 4px 0 0 0;
+    font-size: 14px;
+}
+
+.pulse-divider {
+    height: 3px;
+    background: linear-gradient(90deg, #4FD9B3, #0E9E82, #4FD9B3);
+    border-radius: 3px;
+    margin: 20px 0;
+    opacity: 0.6;
+}
+
+[data-testid="stChatMessage"] {
+    border-radius: 14px;
+    padding: 4px 8px;
+}
+
+.stButton button {
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+[data-testid="stFileUploader"] {
+    border-radius: 12px;
+    border: 2px dashed #0E9E82;
+    padding: 10px;
+}
+</style>
+
+<div class="niramoy-header">
+    <h1>🩺 NIRAMOY-24</h1>
+    <p>আপনার ২৪/৭ স্বাস্থ্য সহায়ক — এটি ডাক্তারের বিকল্প নয়</p>
+</div>
+""", unsafe_allow_html=True)
 
 # Gemini কানেক্ট করা
 genai.configure(api_key=api_key)
@@ -80,7 +137,7 @@ if uploaded_file is not None:
             st.markdown("### 📋 প্রেসক্রিপশনে যা লেখা আছে:")
             st.markdown(response.text)
 
-st.divider()
+st.markdown('<div class="pulse-divider"></div>', unsafe_allow_html=True)
 
 # ==============================
 # সেকশন ২: চ্যাট
